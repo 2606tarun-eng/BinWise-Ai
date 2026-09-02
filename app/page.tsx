@@ -297,10 +297,20 @@ export default function Page() {
         {activeTab === 'home' && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
 
-            {/* HERO SPLIT SECTION */}
-            <section className="bg-white border-b border-slate-200">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center py-16 lg:py-24">
+            {/* HERO SECTION */}
+            <section className="relative overflow-hidden bg-white border-b border-slate-200">
+              {/* Mobile-only background overlay */}
+              <div className="lg:hidden absolute inset-0 z-0 pointer-events-none">
+                <img
+                  src="/clean-earth.jpg"
+                  alt="Background Earth"
+                  className="w-full h-full object-cover opacity-15"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/95 to-white" />
+              </div>
+
+              <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center py-12 sm:py-16 lg:py-24">
                   {/* Left: Text Content */}
                   <div className="max-w-2xl">
                     <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-emerald-700 mb-6">
@@ -314,16 +324,16 @@ export default function Page() {
                     <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
                       Instantly classify household waste using AI vision. Get verified CPCB disposal instructions, locate drop-off points, and earn Green Karma Points for a cleaner India.
                     </p>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                       <button 
                         onClick={() => document.getElementById('scanner-section')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="rounded-full bg-slate-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-900/20 transition-transform hover:scale-105 active:scale-95"
+                        className="rounded-full bg-slate-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-900/20 transition-transform hover:scale-105 active:scale-95 text-center"
                       >
                         Start Scanning
                       </button>
                       <button 
                         onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="rounded-full bg-white border border-slate-200 px-8 py-3.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+                        className="rounded-full bg-white border border-slate-200 px-8 py-3.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50 text-center"
                       >
                         How it works
                       </button>
@@ -345,8 +355,8 @@ export default function Page() {
                     </div>
                   </div>
 
-                  {/* Right: Image */}
-                  <div className="relative lg:ml-auto w-full max-w-lg mx-auto">
+                  {/* Right: Desktop-only Image Card */}
+                  <div className="hidden lg:block relative lg:ml-auto w-full max-w-lg mx-auto">
                     <div className="absolute inset-0 bg-emerald-400 blur-[80px] opacity-20 rounded-full"></div>
                     <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-slate-200/50">
                       <img
@@ -354,16 +364,31 @@ export default function Page() {
                         alt="Crystal clean earth representing environmental sustainability"
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20"></div>
+                      
+                      {/* Top-left live badge */}
+                      <div className="absolute top-5 left-5">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-emerald-400 border border-slate-700/50 shadow-lg">
+                          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                          AI Vision Powered
+                        </div>
+                      </div>
+
+                      {/* Bottom glassmorphic card */}
                       <div className="absolute bottom-6 left-6 right-6">
-                        <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4">
-                          <div className="h-12 w-12 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                            <Leaf className="h-6 w-6 text-emerald-600" />
+                        <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center justify-between">
+                          <div className="flex items-center gap-3.5">
+                            <div className="h-11 w-11 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0 shadow-md shadow-emerald-700/20 text-white">
+                              <Leaf className="h-5 w-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-bold text-slate-900 font-display">Zero Landfill Initiative</p>
+                              <p className="text-[11px] text-slate-500 font-medium">CPCB 4-Bin Standard Alignment</p>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-sm font-bold text-slate-900">Zero Waste Mission</p>
-                            <p className="text-xs text-slate-600 font-medium mt-0.5">Building a circular economy</p>
-                          </div>
+                          <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60 shadow-sm">
+                            98% Acc.
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -710,7 +735,7 @@ export default function Page() {
                   {[
                     { num: '01', title: 'AI Identification', desc: 'Upload a photo. Our neural model detects material composition and contamination levels with 98% accuracy.', img: '/ai-identification-step.jpg' },
                     { num: '02', title: 'CPCB Mapping', desc: 'Instantly maps the item to the Central Pollution Control Board four-bin segregation matrix with DIY preparation protocols.', img: '/cpcb-step.png' },
-                    { num: '03', title: 'Karma Rewards', desc: 'Locate verified municipal drop-off centres, upload proof of responsible disposal, and earn Green Karma Points.', img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=600' },
+                    { num: '03', title: 'Karma Rewards', desc: 'Locate verified municipal drop-off centres, upload proof of responsible disposal, and earn Green Karma Points.', img: '/karma-rewards-step.jpg' },
                   ].map(step => (
                     <div key={step.num} className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
                       <div className="h-48 overflow-hidden relative">
@@ -739,10 +764,10 @@ export default function Page() {
                 
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                   {[
-                    { color: 'bg-emerald-500', name: 'Green Bin', type: 'Wet / Organic', text: 'Food peels, tea bags, garden leaves. Converts to biogas & compost.', img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=400' },
-                    { color: 'bg-sky-500', name: 'Blue Bin', type: 'Dry / Recyclable', text: 'PET bottles, paper, cardboard, glass. Remanufactured into new goods.', img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=400' },
-                    { color: 'bg-red-500', name: 'Red Bin', type: 'Sanitary Waste', text: 'Soiled diapers, bandages, medicines. Safe thermal incineration.', img: 'https://images.unsplash.com/photo-1584744982491-665216d95f8b?auto=format&fit=crop&q=80&w=400' },
-                    { color: 'bg-slate-700', name: 'Black Bin', type: 'Hazardous', text: 'Batteries, electronics, paints. TSDF recovery extracts heavy metals.', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400' },
+                    { color: 'bg-emerald-500', name: 'Green Bin', type: 'Wet / Organic', text: 'Food peels, tea bags, garden leaves. Converts to biogas & compost.', img: '/green-bin.jpg' },
+                    { color: 'bg-sky-500', name: 'Blue Bin', type: 'Dry / Recyclable', text: 'PET bottles, paper, cardboard, glass. Remanufactured into new goods.', img: '/blue-bin.png' },
+                    { color: 'bg-red-500', name: 'Red Bin', type: 'Sanitary Waste', text: 'Soiled diapers, bandages, medicines. Safe thermal incineration.', img: '/red-bin.png' },
+                    { color: 'bg-slate-700', name: 'Black Bin', type: 'Hazardous', text: 'Batteries, electronics, paints. TSDF recovery extracts heavy metals.', img: '/black-bin.png' },
                   ].map(b => (
                     <div key={b.name} className="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700 transition hover:border-slate-500">
                       <div className="h-32 overflow-hidden">
