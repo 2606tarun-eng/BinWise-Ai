@@ -709,7 +709,7 @@ export default function Page() {
                 <div className="grid gap-6 md:grid-cols-3">
                   {[
                     { num: '01', title: 'AI Identification', desc: 'Upload a photo. Our neural model detects material composition and contamination levels with 98% accuracy.', img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&q=80&w=600' },
-                    { num: '02', title: 'CPCB Mapping', desc: 'Instantly maps the item to the Central Pollution Control Board four-bin segregation matrix with DIY preparation protocols.', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=600' },
+                    { num: '02', title: 'CPCB Mapping', desc: 'Instantly maps the item to the Central Pollution Control Board four-bin segregation matrix with DIY preparation protocols.', img: '/cpcb-step.png' },
                     { num: '03', title: 'Karma Rewards', desc: 'Locate verified municipal drop-off centres, upload proof of responsible disposal, and earn Green Karma Points.', img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=600' },
                   ].map(step => (
                     <div key={step.num} className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
