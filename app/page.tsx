@@ -377,9 +377,15 @@ export default function Page() {
               {/* SCANNER SECTION */}
               <section id="scanner-section" className="scroll-mt-24">
                 <div className="rounded-[2.5rem] bg-slate-900 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+                  {/* Background image overlay */}
+                  <div className="absolute inset-0 opacity-40">
+                    <img src="/scanner-bg.jpg" alt="Nature glass globe background" className="w-full h-full object-cover mix-blend-luminosity" />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-900/80 to-slate-900" />
+                  
                   {/* Decorative background blur */}
-                  <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-500/20 blur-[100px]" />
-                  <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-sky-500/10 blur-[100px]" />
+                  <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-500/20 blur-[100px] z-0" />
+                  <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-sky-500/10 blur-[100px] z-0" />
                   
                   <div className="relative z-10">
                     <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
