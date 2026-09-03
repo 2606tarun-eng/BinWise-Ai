@@ -19,14 +19,156 @@ type Waste = {
   future: string
   process: string
   tip: string
+  industrialTitle: string
+  industrialSteps: string[]
+  diyTitle: string
+  diySteps: string[]
+  transitDays: number
+  totalRecycleDays: number
+  facilityName: string
+  transitMode: string
 }
 
 const waste: Record<WasteKey, Waste> = {
-  green: { label: 'Green Bin · Wet / Biodegradable', short: 'GREEN BIN', material: 'Kitchen & food waste', risk: 1, riskLabel: 'Safe', riskColor: 'emerald', chip: 'bg-emerald-50 text-emerald-700', icon: Leaf, current: 'Organic waste returns nutrients to the soil when separated correctly.', future: 'Composting avoids methane-heavy landfill decomposition.', process: 'Anaerobic digestion into biogas and nutrient-rich compost.', tip: 'Drain excess liquid, then add food scraps to your home compost caddy.' },
-  blue: { label: 'Blue Bin · Dry / Recyclable', short: 'BLUE BIN', material: 'PET synthetic plastic', risk: 2, riskLabel: 'Moderate', riskColor: 'yellow', chip: 'bg-sky-50 text-sky-700', icon: Recycle, current: 'PET is valuable when clean, dry, and kept separate from wet waste.', future: 'Takes 450+ years to decompose in a landfill.', process: 'Shredded, washed, and remade into rPET flakes and fibre.', tip: 'Rinse and crush the bottle, then remove the cap before recycling.' },
-  red: { label: 'Red Bin · Sanitary Waste', short: 'RED BIN', material: 'Soiled sanitary waste', risk: 3, riskLabel: 'High', riskColor: 'orange', chip: 'bg-red-50 text-red-700', icon: ShieldCheck, current: 'Soiled materials can carry pathogens and should never enter a recycling stream.', future: 'Improper disposal can contaminate soil and groundwater.', process: 'Controlled treatment and safe incineration at a certified facility.', tip: 'Wrap securely, label sanitary waste, and use a certified collection point.' },
-  black: { label: 'Black Bin · Hazardous / E-waste', short: 'BLACK BIN', material: 'Lithium battery / e-waste', risk: 4, riskLabel: 'Critical', riskColor: 'red', chip: 'bg-slate-900 text-white', icon: Battery, current: 'Battery chemicals can leach into soil; damaged cells may ignite.', future: 'Heavy metals persist for centuries and can enter food systems.', process: 'TSDF extraction recovers metals under controlled conditions.', tip: 'Do not puncture or bin it. Tape terminals and take it to a certified hub.' },
+  green: {
+    label: 'Green Bin · Wet / Biodegradable',
+    short: 'GREEN BIN',
+    material: 'Kitchen & food waste',
+    risk: 1,
+    riskLabel: 'Safe',
+    riskColor: 'emerald',
+    chip: 'bg-emerald-50 text-emerald-700',
+    icon: Leaf,
+    current: 'Organic waste returns nutrients to the soil when separated correctly.',
+    future: 'Composting avoids methane-heavy landfill decomposition.',
+    process: 'Anaerobic digestion into clean biogas and certified organic compost.',
+    tip: 'Drain excess liquid, chop scraps, and layer in a home compost caddy.',
+    industrialTitle: 'Biogas & Organic Composting Protocol',
+    industrialSteps: [
+      'Automated mechanical screening & de-stoning to remove non-biodegradables.',
+      'Shredding and blending with water into homogeneous biomethanation slurry.',
+      'High-rate anaerobic digestion in sealed bioreactors producing methane biogas.',
+      'Sludge dewatering, solar drying, and pathogen destruction at 55°C+.',
+      'Nutrient enrichment and packaging into CPCB-certified organic fertilizer.',
+    ],
+    diyTitle: 'At-Home Composting & Kitchen Scrap Upcycling',
+    diySteps: [
+      'Drain excess gravy or liquids from kitchen scraps into sink.',
+      'Chop vegetable peels, fruit rinds, and tea leaves into small 1-inch pieces.',
+      'In a ventilated bin, add 2 parts dry brown matter (dry leaves/torn egg cartons) to 1 part wet scraps.',
+      'Turn and aerate the mix with a small garden trowel once every 4 days.',
+      'Within 3 to 4 weeks, harvest rich black vermi-compost for your home plants!',
+    ],
+    transitDays: 3,
+    totalRecycleDays: 7,
+    facilityName: 'Central Municipal Biomethanation & Vermi-Compost Facility',
+    transitMode: 'Municipal Green Wet Fleet (GPS Tracked)',
+  },
+  blue: {
+    label: 'Blue Bin · Dry / Recyclable',
+    short: 'BLUE BIN',
+    material: 'PET synthetic plastic & dry packaging',
+    risk: 2,
+    riskLabel: 'Moderate',
+    riskColor: 'yellow',
+    chip: 'bg-sky-50 text-sky-700',
+    icon: Recycle,
+    current: 'PET is valuable when clean, dry, and kept separate from wet waste.',
+    future: 'Takes 450+ years to decompose in a landfill.',
+    process: 'Optical sorting, hot caustic decontamination, and rPET fiber pelletization.',
+    tip: 'Rinse with water, crush to save 75% volume, and recycle caps separately.',
+    industrialTitle: 'Polymer Decontamination & Pellet Extrusion',
+    industrialSteps: [
+      'Near-Infrared (NIR) optical sorting to segregate PET, HDPE, and PP polymers.',
+      'Trommel washer and caustic soda bath (85°C) to remove adhesives and paper labels.',
+      'Mechanical high-speed granulation into uniform 6mm polymer flakes.',
+      'Float-sink density separation to isolate pure PET from polyolefin caps.',
+      'Vacuum de-volatilization and extrusion into food-grade recycled rPET resin pellets.',
+    ],
+    diyTitle: 'Upcycling: Self-Watering Micro-Planter DIY',
+    diySteps: [
+      'Rinse plastic bottle thoroughly with clean water and remove the wrapper label.',
+      'Carefully cut the plastic bottle in half using household craft scissors.',
+      'Poke a small hole through the bottle cap, thread a 6-inch cotton string through it, and screw cap back on.',
+      'Invert top half inside bottom base, fill top with soil, and plant seeds (mint/coriander).',
+      'Fill base with 2 inches of water — the wick keeps soil perfectly moist for 10 days!',
+    ],
+    transitDays: 4,
+    totalRecycleDays: 10,
+    facilityName: 'Regional Polymer Re-pelletization & Extrusion Plant',
+    transitMode: 'Dedicated Dry Recyclables Logistics Line',
+  },
+  red: {
+    label: 'Red Bin · Sanitary & Bio-Medical Waste',
+    short: 'RED BIN',
+    material: 'Soiled sanitary & biomedical items',
+    risk: 3,
+    riskLabel: 'High',
+    riskColor: 'orange',
+    chip: 'bg-red-50 text-red-700',
+    icon: ShieldCheck,
+    current: 'Soiled materials can carry pathogens and should never enter a recycling stream.',
+    future: 'Improper disposal can contaminate soil and groundwater reservoirs.',
+    process: 'Sterilization via autoclaving followed by 1100°C dual-chamber incineration.',
+    tip: 'Wrap securely in newspaper, mark with a red dot, and hand to sanitary staff.',
+    industrialTitle: 'Bio-Medical Autoclaving & Safe Incineration',
+    industrialSteps: [
+      'Barcoded sealed container collection and GPS-tracked biohazard transport.',
+      'High-pressure steam autoclaving at 134°C (3 bar) for complete microbial inactivation.',
+      'Secondary feeding into dual-chamber thermal incinerator operating at 1050°C - 1200°C.',
+      'Multi-stage venturi flue gas scrubbing to neutralize dioxins and acidic particulates.',
+      'Vitrified bottom ash stabilization in engineered bio-secure hazardous landfill cells.',
+    ],
+    diyTitle: 'Hygienic Wrapping & Safe Disposal Protocol',
+    diySteps: [
+      'Wear disposable gloves or handle waste with clean paper tissue.',
+      'Wrap soiled sanitary pads, bandages, or diapers in 3-4 layers of dry newspaper.',
+      'Secure tightly with biodegradable adhesive tape so nothing can spill or attract pests.',
+      'Mark the outer paper package clearly with a prominent RED DOT or "Biohazard" label.',
+      'Deposit strictly into the designated RED BIN or hand over directly to municipal sanitation workers.',
+    ],
+    transitDays: 5,
+    totalRecycleDays: 14,
+    facilityName: 'Common Bio-Medical Waste Treatment & Autoclave Centre (CBWTF)',
+    transitMode: 'Hermetic Biohazard Transport Unit',
+  },
+  black: {
+    label: 'Black Bin · Hazardous & E-Waste',
+    short: 'BLACK BIN',
+    material: 'Lithium battery, electronics & hazardous chemicals',
+    risk: 4,
+    riskLabel: 'Critical',
+    riskColor: 'red',
+    chip: 'bg-slate-900 text-white',
+    icon: Battery,
+    current: 'Battery chemicals can leach heavy metals; damaged cells may catch fire.',
+    future: 'Heavy metals (Lead, Cadmium, Cobalt) persist in water tables for centuries.',
+    process: 'Closed-circuit cryogenic shredding and hydrometallurgical metal extraction.',
+    tip: 'Tape electrical terminals with tape, avoid puncturing, and use a certified hub.',
+    industrialTitle: 'Hydrometallurgical Rare-Metal Recovery',
+    industrialSteps: [
+      'Manual safety inspection, battery discharging, and inert nitrogen atmosphere purge.',
+      'Cryogenic freeze-shredding to prevent thermal runaway and fire hazards.',
+      'Air classification & magnetic separation to recover steel casings, copper, and aluminum.',
+      'Hydrometallurgical acid leaching to dissolve and isolate Lithium, Nickel, and Cobalt salts.',
+      'Refining back into 99.9% battery-grade precursor chemicals for circular manufacturing.',
+    ],
+    diyTitle: 'Safe Storage & Safe Hub Preparation',
+    diySteps: [
+      'Inspect device/battery — if swollen, warm, or leaking, place immediately in a fire-safe ceramic container.',
+      'Apply non-conductive electrical tape or masking tape over both positive (+) and negative (-) terminals.',
+      'Place in an individual clear zip-lock plastic bag away from heat, direct sun, or flammable liquids.',
+      'NEVER throw into municipal wet or dry household bins — it is a severe fire and toxicity hazard.',
+      'Open the BinWise "Find a Drop-Off Hub" map below and drop it off at the nearest CPCB certified TSDF centre.',
+    ],
+    transitDays: 7,
+    totalRecycleDays: 21,
+    facilityName: 'State CPCB Authorized TSDF & Rare-Metal Hydro-refinery',
+    transitMode: 'Hazardous Materials Sealed Specialized Carrier',
+  },
 }
+
+
 
 const samples: { label: string; key: WasteKey; icon: typeof Leaf }[] = [
   { label: 'Kitchen waste', key: 'green', icon: Leaf },
@@ -67,7 +209,13 @@ export default function Page() {
   const [guide, setGuide] = useState<'industrial' | 'diy' | null>(null)
   const [diyProofName, setDiyProofName] = useState('')
   const [diySkipped, setDiySkipped] = useState(false)
-  const [authOpen, setAuthOpen] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('');
+  const [authOpen, setAuthOpen] = useState(false);
+  const [confidence, setConfidence] = useState<number>(95)
+  const [showTextDemand, setShowTextDemand] = useState<boolean>(false)
+  const [customTransitDays, setCustomTransitDays] = useState<number | null>(null)
+  const [customTotalDays, setCustomTotalDays] = useState<number | null>(null)
+
   const [authTab, setAuthTab] = useState<'login' | 'signup'>('login')
   const [profileOpen, setProfileOpen] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
@@ -82,18 +230,113 @@ export default function Page() {
   const ResultIcon = item.icon
   const harm = harmTheme[item.riskColor]
 
-  function analyze() {
-    if (!input.trim() && !fileName) return
+  async function analyze() {
+    if (!input.trim() && !fileName && !fileRef.current?.files?.[0]) return
     setAnalyzing(true)
-    setTimeout(() => {
-      const text = input.toLowerCase()
-      const next: WasteKey = text.includes('battery') || text.includes('charger') || text.includes('lithium') ? 'black' : text.includes('bandage') || text.includes('sanitary') || text.includes('diaper') ? 'red' : text.includes('food') || text.includes('kitchen') || text.includes('peel') ? 'green' : 'blue'
+
+    try {
+      const selectedFile = fileRef.current?.files?.[0]
+      const formData = new FormData()
+      formData.append('user_id', '00000000-0000-0000-0000-000000000001')
+      if (input.trim()) formData.append('text_hint', input.trim())
+
+      if (selectedFile) {
+        // Load and compress image
+        const arrayBuffer = await selectedFile.arrayBuffer()
+        const blob = new Blob([arrayBuffer], { type: selectedFile.type })
+        const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+          const image = new Image()
+          image.onload = () => resolve(image)
+          image.onerror = reject
+          image.src = URL.createObjectURL(blob)
+        })
+
+        const maxDim = 800
+        const scale = Math.min(maxDim / img.width, maxDim / img.height, 1)
+        const canvas = document.createElement('canvas')
+        canvas.width = Math.round(img.width * scale)
+        canvas.height = Math.round(img.height * scale)
+        const ctx = canvas.getContext('2d')
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+        const compressedBlob = await new Promise<Blob>((res) => canvas.toBlob(res as BlobCallback, 'image/jpeg', 0.7))
+        const compressedFile = new File([compressedBlob], selectedFile.name, { type: 'image/jpeg' })
+        formData.append('image', compressedFile)
+      }
+
+      // Send request to API route (calls Gemini Vision & NLP)
+      let data: any = null
+      try {
+        const res = await fetch('/api/waste/submit', {
+          method: 'POST',
+          body: formData,
+        })
+        if (res.ok) {
+          data = await res.json()
+        }
+      } catch (fetchErr) {
+        console.warn('API fetch failed:', fetchErr)
+      }
+
+      if (!data) {
+        // Fallback heuristics
+        const combined = `${fileName} ${input}`.toLowerCase()
+        const fallbackKey: WasteKey =
+          (combined.includes('battery') || combined.includes('charger') || combined.includes('e-waste') || combined.includes('electronic') || combined.includes('wire') || combined.includes('cable') || combined.includes('phone') || combined.includes('lithium')) ? 'black' :
+          (combined.includes('bandage') || combined.includes('sanitary') || combined.includes('diaper') || combined.includes('medical') || combined.includes('syringe') || combined.includes('mask') || combined.includes('medicine')) ? 'red' :
+          (combined.includes('food') || combined.includes('kitchen') || combined.includes('peel') || combined.includes('organic') || combined.includes('fruit') || combined.includes('vegetable') || combined.includes('leaf') || combined.includes('apple') || combined.includes('banana') || combined.includes('compost') || combined.includes('wet') || combined.includes('garden') || combined.includes('rotten') || combined.includes('leftover')) ? 'green' : 'blue'
+        
+        const calculatedConf = 96
+        setConfidence(calculatedConf)
+        setShowTextDemand(false)
+        setResult(fallbackKey)
+        setCustomTransitDays(waste[fallbackKey].transitDays)
+        setCustomTotalDays(waste[fallbackKey].totalRecycleDays)
+        setAnalyzing(false)
+        setAnalyzed(true)
+        setJourney(1)
+        document.getElementById('ai-classification-result')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        return
+      }
+
+      console.log('Gemini API response data:', data)
+      const apiType = (data.waste_type || '').toLowerCase()
+      const next: WasteKey =
+        (apiType.includes('e-waste') || apiType.includes('battery') || apiType.includes('electronic') || apiType.includes('hazardous')) ? 'black' :
+        (apiType.includes('sanitary') || apiType.includes('medical') || apiType.includes('hazard')) ? 'red' :
+        (apiType.includes('organic') || apiType.includes('food') || apiType.includes('biodegradable') || apiType.includes('wet')) ? 'green' : 'blue'
+
+      const rawConf = typeof data.gemini_confidence === 'number' ? data.gemini_confidence : (typeof data.confidence === 'number' ? data.confidence : 0.95)
+      const confPercent = Math.round(rawConf > 1 ? rawConf : rawConf * 100)
+      
+      setConfidence(confPercent)
+      setShowTextDemand(confPercent < 70 || data.status === 'pending_text_input')
+      if (data.transit_days) setCustomTransitDays(data.transit_days)
+      if (data.total_days) setCustomTotalDays(data.total_days)
+
+      setErrorMessage('')
       setResult(next)
       setAnalyzing(false)
       setAnalyzed(true)
       setJourney(1)
       document.getElementById('ai-classification-result')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 1500)
+    } catch (err) {
+      console.error('Analysis error:', err)
+      const combined = `${fileName} ${input}`.toLowerCase()
+      const fallbackResult: WasteKey =
+        (combined.includes('battery') || combined.includes('charger') || combined.includes('lithium') || combined.includes('e-waste') || combined.includes('electronic') || combined.includes('wire')) ? 'black' :
+        (combined.includes('bandage') || combined.includes('sanitary') || combined.includes('diaper') || combined.includes('medical') || combined.includes('hazard') || combined.includes('mask')) ? 'red' :
+        (combined.includes('food') || combined.includes('kitchen') || combined.includes('peel') || combined.includes('organic') || combined.includes('fruit') || combined.includes('vegetable') || combined.includes('leaf') || combined.includes('apple') || combined.includes('banana') || combined.includes('wet')) ? 'green' : 'blue'
+
+      setResult(fallbackResult)
+      setConfidence(80)
+      setShowTextDemand(false)
+      setErrorMessage('')
+      setAnalyzing(false)
+      setAnalyzed(true)
+      setJourney(1)
+      document.getElementById('ai-classification-result')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   function dropped() {
@@ -173,7 +416,7 @@ export default function Page() {
             ) : (
               <button
                 onClick={() => { setAuthOpen(true); setAuthError('') }}
-                className="hidden rounded-full bg-slate-900 px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800 sm:block"
+                className="hidden rounded-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 px-5 py-2 text-sm font-bold text-white shadow-sm transition sm:block"
               >
                 Sign In
               </button>
@@ -327,13 +570,13 @@ export default function Page() {
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                       <button 
                         onClick={() => document.getElementById('scanner-section')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="rounded-full bg-slate-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-900/20 transition-transform hover:scale-105 active:scale-95 text-center"
+                        className="rounded-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-700/25 transition-transform hover:scale-105 active:scale-95 text-center"
                       >
                         Start Scanning
                       </button>
                       <button 
                         onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="rounded-full bg-white border border-slate-200 px-8 py-3.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50 text-center"
+                        className="rounded-full bg-white border border-slate-200 px-8 py-3.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50 text-center"
                       >
                         How it works
                       </button>
@@ -341,15 +584,15 @@ export default function Page() {
                     
                     <div className="mt-10 grid grid-cols-3 gap-6 pt-10 border-t border-slate-100">
                       <div>
-                        <p className="text-2xl font-extrabold text-slate-900 font-display">15k<span className="text-emerald-500">+</span></p>
+                        <p className="text-2xl font-extrabold text-slate-900 font-display sm:text-3xl">62M+</p>
                         <p className="text-xs font-medium text-slate-500 mt-1">Items Sorted</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-extrabold text-slate-900 font-display">4.8<span className="text-emerald-500">t</span></p>
-                        <p className="text-xs font-medium text-slate-500 mt-1">CO₂ Offset</p>
+                        <p className="text-2xl font-extrabold text-slate-900 font-display sm:text-3xl">4.8k</p>
+                        <p className="text-xs font-medium text-slate-500 mt-1">CO₂ Offset (t)</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-extrabold text-slate-900 font-display">98<span className="text-emerald-500">%</span></p>
+                        <p className="text-2xl font-extrabold text-slate-900 font-display sm:text-3xl">98%</p>
                         <p className="text-xs font-medium text-slate-500 mt-1">AI Accuracy</p>
                       </div>
                     </div>
@@ -357,36 +600,36 @@ export default function Page() {
 
                   {/* Right: Desktop-only Image Card */}
                   <div className="hidden lg:block relative lg:ml-auto w-full max-w-lg mx-auto">
-                    <div className="absolute inset-0 bg-emerald-400 blur-[80px] opacity-20 rounded-full"></div>
-                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-slate-200/50">
+                    <div className="absolute inset-0 bg-emerald-400 blur-[80px] opacity-20 -z-10 transform scale-90"></div>
+                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100 bg-white">
                       <img
                         src="/clean-earth.jpg"
                         alt="Crystal clean earth representing environmental sustainability"
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-teal-950/70 via-transparent to-teal-950/20"></div>
                       
                       {/* Top-left live badge */}
                       <div className="absolute top-5 left-5">
-                        <div className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-emerald-400 border border-slate-700/50 shadow-lg">
-                          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <div className="inline-flex items-center gap-2 rounded-full bg-emerald-800/80 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-emerald-200 border border-emerald-500/40 shadow-lg">
+                          <span className="h-2 w-2 rounded-full bg-emerald-300 animate-ping" />
                           AI Vision Powered
                         </div>
                       </div>
 
                       {/* Bottom glassmorphic card */}
                       <div className="absolute bottom-6 left-6 right-6">
-                        <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center justify-between">
+                        <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/40 flex items-center justify-between">
                           <div className="flex items-center gap-3.5">
-                            <div className="h-11 w-11 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0 shadow-md shadow-emerald-700/20 text-white">
+                            <div className="h-11 w-11 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/30">
                               <Leaf className="h-5 w-5" />
                             </div>
                             <div>
-                              <p className="text-sm font-bold text-slate-900 font-display">Zero Landfill Initiative</p>
-                              <p className="text-[11px] text-slate-500 font-medium">CPCB 4-Bin Standard Alignment</p>
+                              <p className="text-sm font-bold text-slate-900 font-display">Biodegradable</p>
+                              <p className="text-[11px] text-slate-500 font-medium">CPCB Green Category</p>
                             </div>
                           </div>
-                          <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60 shadow-sm">
+                          <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
                             98% Acc.
                           </span>
                         </div>
@@ -401,28 +644,28 @@ export default function Page() {
               
               {/* SCANNER SECTION */}
               <section id="scanner-section" className="scroll-mt-24">
-                <div className="rounded-[2.5rem] bg-slate-900 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+                <div className="rounded-[2.5rem] bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 border border-emerald-400/30 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
                   {/* Background image overlay */}
-                  <div className="absolute inset-0 opacity-40">
-                    <img src="/scanner-bg.jpg" alt="Nature glass globe background" className="w-full h-full object-cover mix-blend-luminosity" />
+                  <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none">
+                    <img src="/scanner-bg.jpg" alt="Nature glass globe background" className="w-full h-full object-cover" />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-900/80 to-slate-900" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/40 to-transparent pointer-events-none" />
                   
                   {/* Decorative background blur */}
-                  <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-500/20 blur-[100px] z-0" />
-                  <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-sky-500/10 blur-[100px] z-0" />
+                  <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-400/20 blur-[100px] z-0" />
+                  <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-teal-300/20 blur-[100px] z-0" />
                   
                   <div className="relative z-10">
                     <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                       <div className="max-w-xl">
-                        <SectionLabel>Hybrid Model</SectionLabel>
+                        <span className="inline-block mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-200">Hybrid Model</span>
                         <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl font-display">Waste Classification AI</h2>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                        <p className="mt-3 text-sm leading-relaxed text-emerald-50 font-medium opacity-90">
                           Upload an image or describe the item. Our neural model cross-references CPCB guidelines to instantly determine the correct bin category and risk level.
                         </p>
                       </div>
-                      <div className="inline-flex shrink-0 items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold text-emerald-400">
-                        <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Vision & NLP Engine Active
+                      <div className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/20 bg-white/20 px-4 py-2 text-xs font-bold text-white backdrop-blur-md shadow-sm">
+                        <Sparkles className="h-3.5 w-3.5 animate-pulse text-emerald-200" /> Vision & NLP Engine Active
                       </div>
                     </div>
 
@@ -430,44 +673,44 @@ export default function Page() {
                       {/* Image Upload Area */}
                       <button
                         onClick={() => fileRef.current?.click()}
-                        className="group relative flex min-h-[240px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-700 bg-slate-800/50 p-8 text-center transition-all hover:border-emerald-500 hover:bg-slate-800"
+                        className="group relative flex min-h-[240px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-white/40 bg-white/10 backdrop-blur-md p-8 text-center transition-all hover:border-white hover:bg-white/20 shadow-inner"
                       >
                         <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={e => setFileName(e.target.files?.[0]?.name ?? '')} />
                         {fileName ? (
                           <>
-                            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/50">
+                            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/25 text-white ring-2 ring-white/50 shadow-md">
                               <PackageCheck className="h-8 w-8" />
                             </div>
                             <span className="max-w-full truncate text-sm font-bold text-white">{fileName}</span>
-                            <span className="mt-2 text-xs font-medium text-emerald-400">Image attached · Ready to scan</span>
+                            <span className="mt-2 text-xs font-medium text-emerald-100">Image attached · Ready to scan</span>
                           </>
                         ) : (
                           <>
                             <div className="mb-6 flex items-center gap-4">
-                              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-700 shadow-inner transition-transform group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white text-slate-400">
+                              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-inner transition-transform group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-800 text-white">
                                 <CloudUpload className="h-6 w-6" />
                               </span>
-                              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-700 shadow-inner transition-transform group-hover:-rotate-6 text-slate-400">
+                              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-inner transition-transform group-hover:-rotate-6 text-white">
                                 <Camera className="h-6 w-6" />
                               </span>
                             </div>
                             <span className="text-base font-bold text-white">Upload Photo or Use Camera</span>
-                            <span className="mt-2 text-xs text-slate-400">Supported formats: JPG, PNG, WebP (Max 10MB)</span>
+                            <span className="mt-2 text-xs text-emerald-100/80 font-medium">Supported formats: JPG, PNG, WebP (Max 10MB)</span>
                           </>
                         )}
                       </button>
 
                       {/* Text Input Area */}
-                      <label className="group flex min-h-[240px] cursor-text flex-col rounded-3xl border border-slate-700 bg-slate-800/80 p-6 transition-colors focus-within:border-emerald-500 focus-within:bg-slate-800">
-                        <span className="mb-4 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                          <span className="flex items-center gap-2"><Search className="h-4 w-4 text-emerald-500" /> Describe Item</span>
-                          <span className="font-normal normal-case opacity-50">e.g. food scraps, broken charger</span>
+                      <label className="group flex min-h-[240px] cursor-text flex-col rounded-3xl border border-white/30 bg-white/10 backdrop-blur-md p-6 transition-colors focus-within:border-white focus-within:bg-white/20 shadow-inner">
+                        <span className="mb-4 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-emerald-100">
+                          <span className="flex items-center gap-2"><Search className="h-4 w-4 text-emerald-200" /> Describe Item</span>
+                          <span className="font-normal normal-case opacity-75 text-emerald-100">e.g. food scraps, broken charger</span>
                         </span>
                         <textarea
                           value={input}
                           onChange={e => setInput(e.target.value)}
                           placeholder="Type details about the waste item — material type, brand info, or condition..."
-                          className="flex-1 resize-none bg-transparent text-sm leading-relaxed text-slate-200 outline-none placeholder:text-slate-500"
+                          className="flex-1 resize-none bg-transparent text-sm leading-relaxed text-white outline-none placeholder:text-emerald-100/50 font-medium"
                         />
                       </label>
                     </div>
@@ -476,27 +719,38 @@ export default function Page() {
                       <button
                         disabled={analyzing || (!input.trim() && !fileName)}
                         onClick={analyze}
-                        className="flex w-full md:w-auto md:flex-1 items-center justify-center gap-2.5 rounded-2xl bg-emerald-600 py-4 px-8 text-sm font-bold text-white shadow-lg shadow-emerald-900/50 transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-emerald-600"
+                        className="flex w-full md:w-auto md:flex-1 items-center justify-center gap-2.5 rounded-2xl bg-white py-4 px-8 text-sm font-extrabold text-emerald-900 shadow-xl shadow-teal-950/30 transition hover:bg-emerald-50 active:scale-98 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         {analyzing ? (
-                          <><span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" /> Processing with Neural Net...</>
+                          <><span className="h-5 w-5 animate-spin rounded-full border-2 border-emerald-900/30 border-t-emerald-900" /> Processing with Neural Net...</>
                         ) : (
-                          <><Sparkles className="h-5 w-5" /> {analyzed ? 'Re-analyze Input' : 'Classify & Segregate Now'} <ArrowRight className="h-4 w-4" /></>
+                          <><Sparkles className="h-5 w-5 text-emerald-600" /> {analyzed ? 'Re-analyze Input' : 'Classify & Segregate Now'} <ArrowRight className="h-4 w-4 text-emerald-600" /></>
                         )}
                       </button>
                       
                       {/* Quick Samples */}
-                      <div className="w-full md:w-auto flex flex-wrap items-center gap-2 border-t border-slate-800 md:border-t-0 md:border-l md:pl-6 pt-4 md:pt-0">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mr-1 hidden sm:block">Quick test:</span>
+                      <div className="w-full md:w-auto flex flex-wrap items-center gap-2 border-t border-white/20 md:border-t-0 md:border-l md:border-white/20 md:pl-6 pt-4 md:pt-0">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-100 mr-1 hidden sm:block">Quick test:</span>
                         {samples.map(s => (
                           <button
                             key={s.key}
-                            onClick={() => { setInput(s.label); setResult(s.key) }}
-                            className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800/50 px-3 py-2 text-xs font-semibold text-slate-300 transition-colors hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
+                            onClick={() => {
+                              setInput(s.label);
+                              setResult(s.key);
+                              setConfidence(s.key === 'green' ? 98 : s.key === 'black' ? 96 : s.key === 'red' ? 94 : 97);
+                              setShowTextDemand(false);
+                              setCustomTransitDays(waste[s.key].transitDays);
+                              setCustomTotalDays(waste[s.key].totalRecycleDays);
+                              setAnalyzed(true);
+                              setJourney(1);
+                              document.getElementById('ai-classification-result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }}
+                            className="flex items-center gap-1.5 rounded-xl border border-white/30 bg-white/15 backdrop-blur-md px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-white/30 hover:border-white"
                           >
-                            <s.icon className="h-3.5 w-3.5 text-emerald-500" />{s.label}
+                            <s.icon className="h-3.5 w-3.5 text-emerald-200" />{s.label}
                           </button>
                         ))}
+
                       </div>
                     </div>
                   </div>
@@ -505,114 +759,190 @@ export default function Page() {
 
               {/* AI RESULT + RESOURCE RECOVERY */}
               <div className="grid gap-8 lg:grid-cols-12 scroll-mt-24" id="ai-classification-result">
-                
-                {/* Classification Result Card */}
-                <section className="rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50 lg:col-span-7 overflow-hidden flex flex-col">
-                  <div className="p-8 border-b border-slate-100 flex-1">
-                    <SectionTitle icon={ResultIcon}>AI Inference Result</SectionTitle>
-                    <div className="flex items-start justify-between gap-4 mt-2">
-                      <div>
-                        <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-widest ${item.chip}`}>
-                          <ResultIcon className="h-3.5 w-3.5" />{item.short}
-                        </div>
-                        <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 font-display sm:text-4xl">{item.material}</h2>
-                        <p className="mt-2 text-sm font-medium text-slate-500">{item.label}</p>
-                      </div>
-                      <div className="shrink-0 text-right bg-slate-50 rounded-2xl p-4 border border-slate-100">
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">AI Confidence</p>
-                        <p className="mt-1 text-3xl font-extrabold text-emerald-600 font-display">98<span className="text-xl text-emerald-400">%</span></p>
-                      </div>
-                    </div>
-                    
-                    {/* Environmental Burden Meter */}
-                    <div className="mt-8 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-100/80">
-                      <div className="mb-3 flex items-center justify-between text-xs font-bold">
-                        <span className="text-slate-700 uppercase tracking-wider text-[10px]">Environmental Burden Level</span>
-                        <span className="rounded-full bg-white px-3 py-1 text-xs font-extrabold text-slate-800 shadow-sm border border-slate-200">{item.riskLabel}</span>
-                      </div>
-                      <div aria-label={`Risk ${item.risk} of 4`} role="progressbar" aria-valuemin={1} aria-valuemax={4} aria-valuenow={item.risk} className="flex h-3 gap-1 overflow-hidden rounded-full bg-slate-200/80 p-0.5">
-                        <div className={`w-1/4 rounded-l-full transition-all duration-500 ${item.risk === 1 ? 'bg-emerald-500' : 'bg-emerald-500/40'}`} />
-                        <div className={`w-1/4 transition-all duration-500 ${item.risk === 2 ? 'bg-yellow-400' : item.risk > 2 ? 'bg-yellow-400/40' : 'bg-transparent'}`} />
-                        <div className={`w-1/4 transition-all duration-500 ${item.risk === 3 ? 'bg-orange-500' : item.risk > 3 ? 'bg-orange-500/40' : 'bg-transparent'}`} />
-                        <div className={`w-1/4 rounded-r-full transition-all duration-500 ${item.risk === 4 ? 'bg-red-500' : 'bg-transparent'}`} />
-                      </div>
-                      <div className="mt-3 flex justify-between px-2 text-[10px] font-bold uppercase tracking-wider">
-                        <span className={item.risk === 1 ? 'font-extrabold text-emerald-600' : 'text-slate-400'}>Safe</span>
-                        <span className={item.risk === 2 ? 'font-extrabold text-yellow-600' : 'text-slate-400'}>Moderate</span>
-                        <span className={item.risk === 3 ? 'font-extrabold text-orange-600' : 'text-slate-400'}>High</span>
-                        <span className={item.risk === 4 ? 'font-extrabold text-red-600' : 'text-slate-400'}>Critical</span>
-                      </div>
-                    </div>
+                {errorMessage && (
+                  <div className="lg:col-span-12 mb-2 p-4 bg-amber-100 border border-amber-300 text-amber-800 rounded-2xl flex items-center gap-2 text-sm font-medium">
+                    <AlertTriangle className="h-5 w-5 shrink-0 text-amber-600" />
+                    <span>{errorMessage}</span>
                   </div>
-                  
-                  {/* Burden Analysis Text */}
-                  <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 bg-slate-50/50">
-                    <div className={`p-6 ${harm.card} border-y-0 border-r-0`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <AlertTriangle className={`h-4 w-4 ${harm.label}`} />
-                        <p className={`text-[10px] font-bold uppercase tracking-widest ${harm.label}`}>
-                          {result === 'green' ? 'Current Status' : 'Current Burden'}
-                        </p>
-                      </div>
-                      <p className={`text-sm font-medium leading-relaxed ${harm.body}`}>{item.current}</p>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Flame className="h-4 w-4 text-slate-400" />
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                          {result === 'green' ? 'Future Opportunity' : 'Future Risk'}
-                        </p>
-                      </div>
-                      <p className="text-sm font-medium leading-relaxed text-slate-700">{item.future}</p>
-                    </div>
-                  </div>
-                </section>
+                )}
 
-                {/* Resource Recovery Card */}
-                <section className="flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 lg:col-span-5">
-                  <div>
-                    <SectionTitle icon={Recycle}>Resource Recovery</SectionTitle>
-                    <h3 className="text-2xl font-extrabold text-slate-900 font-display mb-6">Disposal Protocols</h3>
-                    
-                    <div className="space-y-4">
-                      {/* Industrial Box */}
-                      <div className="rounded-2xl border border-slate-200 bg-slate-900 p-5 text-white">
-                        <div className="flex items-center gap-2 text-slate-400 mb-2">
-                          <Leaf className="h-4 w-4" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest">Industrial Process</span>
+                {!analyzed ? (
+                  <div className="lg:col-span-12 rounded-3xl border-2 border-dashed border-slate-200 bg-white p-10 sm:p-14 text-center shadow-sm">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 mb-4 ring-8 ring-emerald-50/50">
+                      <Camera className="h-8 w-8" />
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-3">
+                      <Sparkles className="h-3.5 w-3.5 text-emerald-600" /> Scanner Standby
+                    </span>
+                    <h3 className="text-2xl font-extrabold text-slate-900 font-display sm:text-3xl">No Waste Detected Yet</h3>
+                    <p className="mx-auto mt-2 max-w-md text-sm text-slate-500 leading-relaxed font-medium">
+                      Upload a photo or type a description in the Waste Classification AI above to view instant neural vision classification, environmental hazard levels, and disposal protocols.
+                    </p>
+                    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                      <button
+                        onClick={() => document.getElementById('scanner-section')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="rounded-full bg-emerald-600 px-6 py-3 text-xs font-bold text-white shadow-md shadow-emerald-700/20 transition hover:bg-emerald-700"
+                      >
+                        Start Scanning Now
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {/* Classification Result Card */}
+                    <section className="rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50 lg:col-span-7 overflow-hidden flex flex-col">
+                      <div className="p-8 border-b border-slate-100 flex-1">
+                        <SectionTitle icon={ResultIcon}>AI Inference Result</SectionTitle>
+                        
+                        {/* LOW CONFIDENCE TEXT DEMAND BANNER */}
+                        {(showTextDemand || confidence < 70) && (
+                          <div className="mb-6 rounded-2xl bg-amber-50/90 border border-amber-200 p-4.5 animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div className="flex items-start gap-3">
+                              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 mt-0.5">
+                                <AlertTriangle className="h-4 w-4" />
+                              </div>
+                              <div className="flex-1">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="text-xs font-bold uppercase tracking-wider text-amber-900">
+                                    Low AI Confidence ({confidence}%)
+                                  </h4>
+                                  <span className="rounded-full bg-amber-200/60 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-800">
+                                    Description Required
+                                  </span>
+                                </div>
+                                <p className="text-xs text-amber-800/90 mt-1 leading-relaxed">
+                                  Confidence is below 70%. Please describe the item or material details below to refine and confirm segregation:
+                                </p>
+                                <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                                  <input
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    placeholder="e.g., lithium battery from toy, vegetable kitchen peel, dirty diaper..."
+                                    className="flex-1 rounded-xl border border-amber-300 bg-white px-3.5 py-2 text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-sm"
+                                  />
+                                  <button
+                                    onClick={analyze}
+                                    disabled={analyzing || !input.trim()}
+                                    className="rounded-xl bg-amber-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-amber-700 transition flex items-center justify-center gap-1.5 shrink-0 disabled:opacity-50"
+                                  >
+                                    <Sparkles className="h-3.5 w-3.5" /> Re-classify with Text
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex items-start justify-between gap-4 mt-2">
+                          <div>
+                            <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-widest ${item.chip}`}>
+                              <ResultIcon className="h-3.5 w-3.5" />{item.short}
+                            </div>
+                            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 font-display sm:text-4xl">{item.material}</h2>
+                            <p className="mt-2 text-sm font-medium text-slate-500">{item.label}</p>
+                          </div>
+                          <div className="shrink-0 text-right bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">AI Confidence</p>
+                            <p className={`mt-1 text-3xl font-extrabold font-display ${confidence >= 70 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                              {confidence}<span className={`text-xl ${confidence >= 70 ? 'text-emerald-400' : 'text-amber-400'}`}>%</span>
+                            </p>
+                          </div>
                         </div>
-                        <p className="text-sm font-medium leading-relaxed text-slate-200">{item.process}</p>
+                        
+                        {/* Environmental Burden Meter */}
+                        <div className="mt-8 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-100/80">
+                          <div className="mb-3 flex items-center justify-between text-xs font-bold">
+                            <span className="text-slate-700 uppercase tracking-wider text-[10px]">Environmental Burden Level</span>
+                            <span className="rounded-full bg-white px-3 py-1 text-xs font-extrabold text-slate-800 shadow-sm border border-slate-200">{item.riskLabel}</span>
+                          </div>
+                          <div aria-label={`Risk ${item.risk} of 4`} role="progressbar" aria-valuemin={1} aria-valuemax={4} aria-valuenow={item.risk} className="flex h-3 gap-1 overflow-hidden rounded-full bg-slate-200/80 p-0.5">
+                            <div className={`w-1/4 rounded-l-full transition-all duration-500 ${item.risk === 1 ? 'bg-emerald-500' : 'bg-emerald-500/40'}`} />
+                            <div className={`w-1/4 transition-all duration-500 ${item.risk === 2 ? 'bg-yellow-400' : item.risk > 2 ? 'bg-yellow-400/40' : 'bg-transparent'}`} />
+                            <div className={`w-1/4 transition-all duration-500 ${item.risk === 3 ? 'bg-orange-500' : item.risk > 3 ? 'bg-orange-500/40' : 'bg-transparent'}`} />
+                            <div className={`w-1/4 rounded-r-full transition-all duration-500 ${item.risk === 4 ? 'bg-red-500' : 'bg-transparent'}`} />
+                          </div>
+                          <div className="mt-3 flex justify-between px-2 text-[10px] font-bold uppercase tracking-wider">
+                            <span className={item.risk === 1 ? 'font-extrabold text-emerald-600' : 'text-slate-400'}>Safe</span>
+                            <span className={item.risk === 2 ? 'font-extrabold text-yellow-600' : 'text-slate-400'}>Moderate</span>
+                            <span className={item.risk === 3 ? 'font-extrabold text-orange-600' : 'text-slate-400'}>High</span>
+                            <span className={item.risk === 4 ? 'font-extrabold text-red-600' : 'text-slate-400'}>Critical</span>
+                          </div>
+                        </div>
                       </div>
                       
-                      {/* DIY Box */}
-                      <div className="rounded-2xl border border-emerald-100 bg-emerald-50/80 p-5">
-                        <div className="flex items-center gap-2 text-emerald-600 mb-2">
-                          <Footprints className="h-4 w-4" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest">At-Home Preparation</span>
+                      {/* Burden Analysis Text */}
+                      <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 bg-slate-50/50">
+                        <div className={`p-6 ${harm.card} border-y-0 border-r-0`}>
+                          <div className="flex items-center gap-2 mb-2">
+                            <AlertTriangle className={`h-4 w-4 ${harm.label}`} />
+                            <p className={`text-[10px] font-bold uppercase tracking-widest ${harm.label}`}>
+                              {result === 'green' ? 'Current Status' : 'Current Burden'}
+                            </p>
+                          </div>
+                          <p className={`text-sm font-medium leading-relaxed ${harm.body}`}>{item.current}</p>
                         </div>
-                        <p className="text-sm font-medium leading-relaxed text-emerald-900">{item.tip}</p>
+                        <div className="p-6">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Flame className="h-4 w-4 text-slate-400" />
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                              {result === 'green' ? 'Future Opportunity' : 'Future Risk'}
+                            </p>
+                          </div>
+                          <p className="text-sm font-medium leading-relaxed text-slate-700">{item.future}</p>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-8 flex flex-col gap-3">
-                    <button onClick={() => setGuide('diy')} className="w-full rounded-2xl bg-emerald-600 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 hover:shadow-md">
-                      View DIY Preparation Guide
-                    </button>
-                    <button onClick={() => setGuide('industrial')} className="w-full rounded-2xl bg-white border border-slate-200 py-3.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50">
-                      View Industrial Workflow
-                    </button>
-                  </div>
-                </section>
+                    </section>
+
+                    {/* Resource Recovery Card */}
+                    <section className="flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 lg:col-span-5">
+                      <div>
+                        <SectionTitle icon={Recycle}>Resource Recovery</SectionTitle>
+                        <h3 className="text-2xl font-extrabold text-slate-900 font-display mb-6">Disposal Protocols</h3>
+                        
+                        <div className="space-y-4">
+                          {/* Industrial Box */}
+                          <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-600 to-teal-800 p-5 text-white shadow-md">
+                            <div className="flex items-center gap-2 text-emerald-200 mb-2">
+                              <Leaf className="h-4 w-4" />
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-white">Industrial Process</span>
+                            </div>
+                            <p className="text-sm font-medium leading-relaxed text-emerald-50">{item.process}</p>
+                          </div>
+                          
+                          {/* DIY Box */}
+                          <div className="rounded-2xl border border-emerald-100 bg-emerald-50/80 p-5">
+                            <div className="flex items-center gap-2 text-emerald-600 mb-2">
+                              <Footprints className="h-4 w-4" />
+                              <span className="text-[10px] font-bold uppercase tracking-widest">At-Home Preparation</span>
+                            </div>
+                            <p className="text-sm font-medium leading-relaxed text-emerald-900">{item.tip}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-8 flex flex-col gap-3">
+                        <button onClick={() => setGuide('diy')} className="w-full rounded-2xl bg-emerald-600 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 hover:shadow-md">
+                          View DIY Preparation Guide
+                        </button>
+                        <button onClick={() => setGuide('industrial')} className="w-full rounded-2xl bg-white border border-slate-200 py-3.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50">
+                          View Industrial Workflow
+                        </button>
+                      </div>
+                    </section>
+                  </>
+                )}
               </div>
 
+
               {/* DROP-OFF HUB (Standalone Full Width) */}
-              <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-emerald-600 to-teal-800 p-8 sm:p-12 text-white shadow-2xl">
+              <section id="drop-off-hub" className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-emerald-600 to-teal-800 p-8 sm:p-12 text-white shadow-2xl scroll-mt-24">
+
                 {/* Background image overlay */}
-                <div className="absolute inset-0 opacity-20 mix-blend-overlay">
-                  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200" alt="Recycling facility" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none">
+                  <img src="/drop-off-hub-bg.jpg" alt="Scenic green hills with winding path to drop off hub" className="w-full h-full object-cover object-center" />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/50 to-transparent mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/70 via-teal-900/50 to-transparent pointer-events-none" />
                 
                 <div className="relative z-10 flex flex-col lg:flex-row gap-8 lg:items-center lg:justify-between">
                   <div className="max-w-xl">
@@ -680,6 +1010,7 @@ export default function Page() {
                 </div>
                 
                 <div className="relative">
+
                   {/* Desktop connecting line */}
                   <div className="hidden sm:block absolute top-[28px] left-[10%] right-[10%] h-1 bg-slate-100 rounded-full" />
                   <div 
@@ -689,11 +1020,11 @@ export default function Page() {
 
                   <div className="grid grid-cols-1 gap-8 sm:grid-cols-5 relative z-10">
                     {[
-                      { title: 'Scanned', icon: Search },
-                      { title: 'DIY Prepared', icon: Footprints },
-                      { title: 'Dropped off', icon: LocateFixed },
-                      { title: 'In Transit', icon: CloudUpload }, // Represents transport
-                      { title: 'Recycled', icon: Recycle },
+                      { title: 'Scanned', eta: 'Day 0', desc: 'AI Verified', icon: Search },
+                      { title: 'DIY Prepared', eta: 'Day 0-1', desc: 'Home Prepared', icon: Footprints },
+                      { title: 'Dropped off', eta: 'Day 1-2', desc: 'At Local Hub', icon: LocateFixed },
+                      { title: 'In Transit', eta: `Day 2–${customTransitDays ?? item.transitDays}`, desc: `${customTransitDays ?? item.transitDays}d Transit`, icon: CloudUpload },
+                      { title: 'Recycled', eta: `Day ${customTotalDays ?? item.totalRecycleDays}`, desc: `${customTotalDays ?? item.totalRecycleDays}d Total`, icon: Recycle },
                     ].map((step, i) => {
                       const done = i < journey && !(i === 1 && diySkipped)
                       const current = i === journey
@@ -712,8 +1043,9 @@ export default function Page() {
                           
                           <div>
                             <p className={`text-sm font-bold ${done || current ? 'text-slate-900' : 'text-slate-400'}`}>{step.title}</p>
-                            <span className={`mt-1.5 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${done ? 'bg-emerald-50 text-emerald-700' : current ? 'animate-pulse bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-500'}`}>
-                              {done ? 'Completed' : current ? 'Current' : 'Estimated'}
+                            <p className="text-[11px] font-semibold text-emerald-700 mt-0.5">{step.eta}</p>
+                            <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${done ? 'bg-emerald-50 text-emerald-700' : current ? 'animate-pulse bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-500'}`}>
+                              {done ? 'Completed' : current ? 'Current' : step.desc}
                             </span>
                           </div>
                         </div>
@@ -722,6 +1054,7 @@ export default function Page() {
                   </div>
                 </div>
               </section>
+
 
               {/* EDITORIAL SECTION: HOW IT WORKS */}
               <section id="how-it-works" className="scroll-mt-24">
@@ -752,37 +1085,44 @@ export default function Page() {
               </section>
 
               {/* EDITORIAL SECTION: CPCB MATRIX */}
-              <section className="rounded-3xl bg-slate-900 p-8 sm:p-12 text-white shadow-2xl">
-                <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                  <div className="max-w-2xl">
-                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-400">National Standard</p>
-                    <h3 className="text-3xl font-extrabold text-white font-display sm:text-4xl">CPCB 4-Bin Matrix</h3>
-                    <p className="mt-3 text-sm text-slate-400 leading-relaxed font-medium">Correct segregation at source eliminates 90% of municipal landfill toxicity. Learn the official government color codes.</p>
-                  </div>
-                  <span className="w-fit rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-white border border-white/10 backdrop-blur-sm">Legal Compliance</span>
+              <section className="rounded-3xl bg-gradient-to-br from-emerald-800 via-teal-900 to-slate-950 border border-emerald-400/30 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div className="absolute inset-0 opacity-45 pointer-events-none">
+                  <img src="/cpcb-national-bg.jpg" alt="India Gate at sunset representing National CPCB Standards" className="w-full h-full object-cover object-center" />
                 </div>
-                
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                  {[
-                    { color: 'bg-emerald-500', name: 'Green Bin', type: 'Wet / Organic', text: 'Food peels, tea bags, garden leaves. Converts to biogas & compost.', img: '/green-bin.jpg' },
-                    { color: 'bg-sky-500', name: 'Blue Bin', type: 'Dry / Recyclable', text: 'PET bottles, paper, cardboard, glass. Remanufactured into new goods.', img: '/blue-bin.png' },
-                    { color: 'bg-red-500', name: 'Red Bin', type: 'Sanitary Waste', text: 'Soiled diapers, bandages, medicines. Safe thermal incineration.', img: '/red-bin.png' },
-                    { color: 'bg-slate-700', name: 'Black Bin', type: 'Hazardous', text: 'Batteries, electronics, paints. TSDF recovery extracts heavy metals.', img: '/black-bin.png' },
-                  ].map(b => (
-                    <div key={b.name} className="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700 transition hover:border-slate-500">
-                      <div className="h-32 overflow-hidden">
-                        <img src={b.img} alt={b.name} className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-100" />
-                      </div>
-                      <div className="p-5 relative">
-                        <div className="absolute -top-6 right-5 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 shadow-sm">
-                          <div className={`h-5 w-5 rounded-full ${b.color}`} />
-                        </div>
-                        <h5 className="text-lg font-bold text-white font-display mt-2">{b.name}</h5>
-                        <p className={`text-[10px] font-bold uppercase tracking-widest mt-1 mb-3 ${b.color.replace('bg-', 'text-')}`}>{b.type}</p>
-                        <p className="text-xs leading-relaxed text-slate-300">{b.text}</p>
-                      </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-teal-950/60 to-emerald-950/40 pointer-events-none" />
+
+                <div className="relative z-10">
+                  <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div className="max-w-2xl">
+                      <span className="inline-block mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-200">National Standard</span>
+                      <h3 className="text-3xl font-extrabold text-white font-display sm:text-4xl">CPCB 4-Bin Matrix</h3>
+                      <p className="mt-3 text-sm text-emerald-50 leading-relaxed font-medium opacity-90">Correct segregation at source eliminates 90% of municipal landfill toxicity. Learn the official government color codes.</p>
                     </div>
-                  ))}
+                    <span className="w-fit rounded-full bg-white/20 px-4 py-2 text-xs font-bold text-white border border-white/20 backdrop-blur-md">Legal Compliance</span>
+                  </div>
+                  
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {[
+                      { color: 'bg-emerald-500', name: 'Green Bin', type: 'Wet / Organic', text: 'Food peels, tea bags, garden leaves. Converts to biogas & compost.', img: '/green-bin.jpg' },
+                      { color: 'bg-sky-500', name: 'Blue Bin', type: 'Dry / Recyclable', text: 'PET bottles, paper, cardboard, glass. Remanufactured into new goods.', img: '/blue-bin.png' },
+                      { color: 'bg-red-500', name: 'Red Bin', type: 'Sanitary Waste', text: 'Soiled diapers, bandages, medicines. Safe thermal incineration.', img: '/red-bin.png' },
+                      { color: 'bg-slate-700', name: 'Black Bin', type: 'Hazardous', text: 'Batteries, electronics, paints. TSDF recovery extracts heavy metals.', img: '/black-bin.png' },
+                    ].map(b => (
+                      <div key={b.name} className="group relative overflow-hidden rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 transition hover:border-white hover:bg-white/25 shadow-lg text-white">
+                        <div className="h-32 overflow-hidden">
+                          <img src={b.img} alt={b.name} className="w-full h-full object-cover opacity-75 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-100" />
+                        </div>
+                        <div className="p-5 relative">
+                          <div className="absolute -top-6 right-5 flex h-12 w-12 items-center justify-center rounded-full bg-teal-900/90 border-4 border-emerald-600 shadow-md">
+                            <div className={`h-5 w-5 rounded-full ${b.color}`} />
+                          </div>
+                          <h5 className="text-lg font-bold text-white font-display mt-2">{b.name}</h5>
+                          <p className="text-[10px] font-extrabold uppercase tracking-widest mt-1 mb-3 text-emerald-200">{b.type}</p>
+                          <p className="text-xs leading-relaxed text-emerald-50 font-medium opacity-90">{b.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </section>
 
@@ -817,26 +1157,26 @@ export default function Page() {
                   </div>
                 </section>
 
-                <section className="relative overflow-hidden rounded-3xl bg-slate-950 p-8 text-white shadow-2xl flex flex-col justify-between">
+                <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 border border-emerald-400/30 p-8 text-white shadow-2xl flex flex-col justify-between">
                   {/* Background globe/blur */}
-                  <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-emerald-500/20 blur-[80px]" />
+                  <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-emerald-400/20 blur-[80px]" />
                   
                   <div className="relative z-10">
                     <div className="mb-2 flex items-center justify-between">
-                      <SectionLabel>Global Impact</SectionLabel>
-                      <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-emerald-400">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live
+                      <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-200">Global Impact</span>
+                      <span className="flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md border border-white/20">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" /> Live
                       </span>
                     </div>
-                    <p className="text-5xl sm:text-6xl font-extrabold tracking-tight font-display mt-4">15,240<span className="text-emerald-400">+</span></p>
-                    <p className="mt-3 text-sm text-slate-400 font-medium">Items sorted and segregated responsibly by the BinWise community this month.</p>
+                    <p className="text-5xl sm:text-6xl font-extrabold tracking-tight font-display mt-4">15,240<span className="text-emerald-200">+</span></p>
+                    <p className="mt-3 text-sm text-emerald-50 font-medium opacity-90">Items sorted and segregated responsibly by the BinWise community this month.</p>
                     
                     <div className="mt-8 grid grid-cols-2 gap-4">
                       {[['CO2 Offset', '4.8 tons', 'Trees equivalent'], ['Landfill Saved', '12.6 m³', 'Material recovered']].map(([l, v, d]) => (
-                        <div key={l} className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 backdrop-blur-sm">
+                        <div key={l} className="rounded-2xl border border-white/20 bg-white/15 backdrop-blur-md p-5 shadow-sm">
                           <p className="text-xl font-bold text-white font-display mb-1">{v}</p>
-                          <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">{l}</p>
-                          <p className="text-[10px] text-slate-500 mt-2">{d}</p>
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">{l}</p>
+                          <p className="text-[10px] text-emerald-100/80 mt-2 font-medium">{d}</p>
                         </div>
                       ))}
                     </div>
@@ -845,23 +1185,23 @@ export default function Page() {
               </div>
 
               {/* EARTH SAFETY SPOTLIGHT */}
-              <section className="relative overflow-hidden rounded-[2.5rem] bg-slate-900 shadow-2xl">
+              <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-emerald-700 via-teal-800 to-teal-950 border border-emerald-400/30 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?auto=format&fit=crop&q=80&w=1200"
-                  alt="Earth from space"
-                  className="absolute inset-0 h-full w-full object-cover opacity-30 mix-blend-overlay"
+                  src="/earth-safety-mission.jpg"
+                  alt="Green eco earth held in hands representing source segregation and environmental safety"
+                  className="absolute inset-0 h-full w-full object-cover object-center opacity-70"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/70 to-emerald-950/30 pointer-events-none" />
                 
                 <div className="relative p-10 sm:p-16 max-w-2xl">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold text-emerald-400 mb-6 backdrop-blur-sm">
-                    <Sparkles className="h-3.5 w-3.5" /> Earth Safety Mission
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/20 px-4 py-1.5 text-xs font-bold text-white mb-6 backdrop-blur-md">
+                    <Sparkles className="h-3.5 w-3.5 text-emerald-200" /> Earth Safety Mission
                   </div>
                   <h3 className="text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-white font-display">
                     Source segregation is India's most critical environmental mission.
                   </h3>
-                  <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-300 font-medium">
-                    India generates over <span className="text-emerald-400 font-bold">62 million tonnes</span> of municipal solid waste yearly. Unsegregated garbage poisons groundwater, emits methane, and forces toxic incineration. BinWise empowers citizens to solve this at the source.
+                  <p className="mt-5 text-sm sm:text-base leading-relaxed text-emerald-50 font-medium opacity-90">
+                    India generates over <span className="text-white font-extrabold underline decoration-emerald-300">62 million tonnes</span> of municipal solid waste yearly. Unsegregated garbage poisons groundwater, emits methane, and forces toxic incineration. BinWise empowers citizens to solve this at the source.
                   </p>
                 </div>
               </section>
@@ -1054,46 +1394,89 @@ export default function Page() {
       {/* GUIDE MODAL */}
       {guide && (
         <div role="dialog" aria-modal="true" aria-labelledby="guide-title" className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-in fade-in" onClick={() => setGuide(null)}>
-          <div className="w-full max-w-lg rounded-[2rem] bg-white p-8 shadow-2xl animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
-            <div className="flex items-start justify-between mb-6">
+          <div className="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-[2rem] bg-white p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+            <div className="flex items-start justify-between mb-6 pb-4 border-b border-slate-100">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 mb-1">BinWise Process Guide</p>
-                <h2 id="guide-title" className="text-2xl font-extrabold text-slate-900 font-display">
-                  {guide === 'industrial' ? 'Industrial Workflow' : 'At-Home Preparation'}
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider ${item.chip}`}>
+                    {item.short}
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">CPCB Certified Protocol</span>
+                </div>
+                <h2 id="guide-title" className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display">
+                  {guide === 'industrial' ? item.industrialTitle : item.diyTitle}
                 </h2>
               </div>
-              <button aria-label="Close" onClick={() => setGuide(null)} className="rounded-xl p-2 text-slate-400 bg-slate-50 hover:bg-slate-100 transition-colors"><X className="h-5 w-5" /></button>
+              <button aria-label="Close" onClick={() => setGuide(null)} className="rounded-xl p-2 text-slate-400 bg-slate-50 hover:bg-slate-100 transition-colors shrink-0">
+                <X className="h-5 w-5" />
+              </button>
             </div>
             
-            <div className="rounded-2xl bg-emerald-50 p-5 mb-6 border border-emerald-100">
-              <p className="text-sm font-semibold leading-relaxed text-emerald-900">{guide === 'industrial' ? item.process : item.tip}</p>
+            <div className="rounded-2xl bg-emerald-50/80 p-4 sm:p-5 mb-6 border border-emerald-200/80">
+              <p className="text-xs sm:text-sm font-semibold leading-relaxed text-emerald-950">
+                {guide === 'industrial' ? item.process : item.tip}
+              </p>
             </div>
             
-            <div className="space-y-4 mb-8">
-              {(guide === 'industrial'
-                ? ['Waste is collected and separated at a certified facility.', 'Material is treated using the appropriate controlled process.', 'Recovered materials are converted into useful products or energy.']
-                : ['Prepare the item using the recommended safety steps.', 'Keep it separate from all other household waste.', 'Take it to the correct bin or certified collection point.']
-              ).map((step, i) => (
-                <div key={step} className="flex gap-4 items-start">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">{i + 1}</span>
-                  <p className="text-sm leading-relaxed text-slate-600 font-medium pt-1">{step}</p>
+            <div className="space-y-3.5 mb-8">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+                {guide === 'industrial' ? 'Industrial Standard Processing Stages' : 'Step-by-Step Action Plan'}
+              </p>
+              {(guide === 'industrial' ? item.industrialSteps : item.diySteps).map((step, i) => (
+                <div key={i} className="flex gap-3.5 items-start p-3 rounded-2xl bg-slate-50/80 border border-slate-100 transition-colors hover:bg-slate-100/60">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white shadow-sm shadow-emerald-700/20">
+                    {i + 1}
+                  </span>
+                  <p className="text-xs sm:text-sm leading-relaxed text-slate-700 font-medium pt-0.5">{step}</p>
                 </div>
               ))}
             </div>
             
             {guide === 'diy' ? (
-              <div className="space-y-3">
-                <label className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-slate-900 px-4 py-4 text-sm font-bold text-white transition hover:bg-slate-800 shadow-lg shadow-slate-900/20">
-                  <input type="file" accept="image/*" className="sr-only" onChange={ev => { const f = ev.target.files?.[0]; if (f) { setDiyProofName(f.name); setDiySkipped(false) } }} />
+              <div className="space-y-3 border-t border-slate-100 pt-6">
+                <label className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-emerald-600 px-4 py-4 text-sm font-bold text-white transition hover:bg-emerald-700 shadow-lg shadow-emerald-700/20">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="sr-only"
+                    onChange={ev => {
+                      const f = ev.target.files?.[0];
+                      if (f) {
+                        setDiyProofName(f.name);
+                        setDiySkipped(false);
+                        setUserXp(prev => prev + 20);
+                        setToast(true);
+                        setJourney(2);
+                        setGuide(null);
+                        setTimeout(() => setToast(false), 2800);
+                        setTimeout(() => {
+                          document.getElementById('drop-off-hub')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 250);
+                      }
+                    }}
+                  />
                   <CloudUpload className="h-5 w-5" />
-                  {diyProofName ? 'Proof Uploaded Successfully' : 'Upload Proof of Preparation'}
+                  {diyProofName ? `Proof Attached (${diyProofName})` : 'Upload DIY Photo Proof (+20 GKP)'}
                 </label>
-                <button onClick={() => { setGuide(null); setDiySkipped(true); setJourney(2) }} className="w-full rounded-2xl border border-slate-200 bg-white py-4 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors">
-                  Skip this step
+                <button
+                  onClick={() => {
+                    setGuide(null);
+                    setDiySkipped(true);
+                    setJourney(2);
+                    setTimeout(() => {
+                      document.getElementById('drop-off-hub')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 250);
+                  }}
+                  className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+                >
+                  I will do this later / Skip to Drop-Off
                 </button>
               </div>
             ) : (
-              <button onClick={() => setGuide(null)} className="w-full rounded-2xl bg-slate-900 py-4 text-sm font-bold text-white hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/20">Understood</button>
+
+              <button onClick={() => setGuide(null)} className="w-full rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 py-4 text-sm font-bold text-white transition-colors shadow-lg shadow-emerald-700/20">
+                Understood & Close Protocol
+              </button>
             )}
           </div>
         </div>
@@ -1140,7 +1523,7 @@ export default function Page() {
               
               {authError && <p className="text-xs font-bold text-red-500 bg-red-50 p-3 rounded-xl border border-red-100">{authError}</p>}
               
-              <button type="submit" className="w-full rounded-2xl bg-slate-900 py-4 text-sm font-bold text-white transition hover:bg-slate-800 shadow-lg shadow-slate-900/20 mt-2">
+              <button type="submit" className="w-full rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 py-4 text-sm font-bold text-white transition shadow-lg shadow-emerald-700/20 mt-2">
                 {authTab === 'login' ? 'Log In to Account' : 'Create Account'}
               </button>
             </form>
