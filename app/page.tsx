@@ -27,6 +27,9 @@ type Waste = {
   totalRecycleDays: number
   facilityName: string
   transitMode: string
+  finalTitle: string
+  finalDesc: string
+  finalIcon: typeof Leaf
 }
 
 const waste: Record<WasteKey, Waste> = {
@@ -63,6 +66,9 @@ const waste: Record<WasteKey, Waste> = {
     totalRecycleDays: 7,
     facilityName: 'Central Municipal Biomethanation & Vermi-Compost Facility',
     transitMode: 'Municipal Green Wet Fleet (GPS Tracked)',
+    finalTitle: 'Bio-Composted',
+    finalDesc: 'Soil Compost & Biogas',
+    finalIcon: Leaf,
   },
   blue: {
     label: 'Blue Bin · Dry / Recyclable',
@@ -97,6 +103,9 @@ const waste: Record<WasteKey, Waste> = {
     totalRecycleDays: 10,
     facilityName: 'Regional Polymer Re-pelletization & Extrusion Plant',
     transitMode: 'Dedicated Dry Recyclables Logistics Line',
+    finalTitle: 'Recycled',
+    finalDesc: 'rPET Pelletized',
+    finalIcon: Recycle,
   },
   red: {
     label: 'Red Bin · Sanitary & Bio-Medical Waste',
@@ -131,6 +140,9 @@ const waste: Record<WasteKey, Waste> = {
     totalRecycleDays: 14,
     facilityName: 'Common Bio-Medical Waste Treatment & Autoclave Centre (CBWTF)',
     transitMode: 'Hermetic Biohazard Transport Unit',
+    finalTitle: 'Safely Disposed',
+    finalDesc: 'Incinerated & Neutralized',
+    finalIcon: ShieldCheck,
   },
   black: {
     label: 'Black Bin · Hazardous & E-Waste',
@@ -165,6 +177,9 @@ const waste: Record<WasteKey, Waste> = {
     totalRecycleDays: 21,
     facilityName: 'State CPCB Authorized TSDF & Rare-Metal Hydro-refinery',
     transitMode: 'Hazardous Materials Sealed Specialized Carrier',
+    finalTitle: 'Extracted & Secured',
+    finalDesc: 'Rare Metals / TSDF Secured',
+    finalIcon: Sparkles,
   },
 }
 
@@ -1024,14 +1039,14 @@ export default function Page() {
                       { title: 'DIY Prepared', eta: 'Day 0-1', desc: 'Home Prepared', icon: Footprints },
                       { title: 'Dropped off', eta: 'Day 1-2', desc: 'At Local Hub', icon: LocateFixed },
                       { title: 'In Transit', eta: `Day 2–${customTransitDays ?? item.transitDays}`, desc: `${customTransitDays ?? item.transitDays}d Transit`, icon: CloudUpload },
-                      { title: 'Recycled', eta: `Day ${customTotalDays ?? item.totalRecycleDays}`, desc: `${customTotalDays ?? item.totalRecycleDays}d Total`, icon: Recycle },
+                      { title: item.finalTitle || 'Recycled', eta: `Day ${customTotalDays ?? item.totalRecycleDays}`, desc: item.finalDesc || `${customTotalDays ?? item.totalRecycleDays}d Processed`, icon: item.finalIcon || Recycle },
                     ].map((step, i) => {
                       const done = i < journey && !(i === 1 && diySkipped)
                       const current = i === journey
                       const Icon = step.icon
                       
                       return (
-                        <div key={step.title} className="relative flex sm:flex-col items-center gap-4 sm:gap-4 text-left sm:text-center group">
+                        <div key={i} className="relative flex sm:flex-col items-center gap-4 sm:gap-4 text-left sm:text-center group">
                           {/* Mobile connecting line */}
                           {i < 4 && (
                             <div className={`sm:hidden absolute top-14 left-[28px] w-0.5 h-full -z-10 transition-colors duration-1000 ${i < journey ? 'bg-emerald-500' : 'bg-slate-100'}`} />
