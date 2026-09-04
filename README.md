@@ -58,14 +58,14 @@ Tracks discarded items across **5 transparent stages**:
 
 ### 4. 🛠️ Dual Resource Recovery Protocols
 - **Industrial Process Guide**: Step-by-step technical blueprints (e.g. Rare-Metal Hydro-refining, Bioreactor Anaerobic Digestion, High-temp Gasification).
-- **At-Home DIY Upcycling Project**: Practical zero-cost home projects (e.g. Self-watering planters, citrus peel bio-enzymes) with **Photo Proof Verification** to earn $+20$ GKP!
+- **At-Home DIY Upcycling Project**: Practical zero-cost home projects (e.g. Self-watering planters, citrus peel bio-enzymes) with step-by-step preparation guides.
 
 ### 5. 📍 Certified Municipal Drop-Off Hub Locator
 - Direct 1-click Google Maps integration locating nearest authorized CPCB collection centers and dry waste aggregation kiosks.
-- Drop-off completion confirmation with Green Karma Points reward.
+- Drop-off completion verification with **Green Karma Points (+20 GKP)** reward.
 
 ### 6. 🏆 Gamified Eco-Warriors Leaderboard
-- Earn **Green Karma Points (GKP)** for every verified segregation action, DIY project, and hub drop-off.
+- Earn **Green Karma Points (GKP)** for every verified drop-off at certified collection hubs.
 - Live community leaderboard driving positive civic competition and habit formation.
 
 ### 7. 🛡️ Anti-Farming & Fraud Prevention Architecture (Roadmap)

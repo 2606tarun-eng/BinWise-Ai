@@ -341,7 +341,7 @@ export default function Page() {
 
   function dropped() {
     setJourney(3)
-    if (proofName) setUserXp(20)
+    setUserXp(prev => prev + 20)
     setToast(true)
     setTimeout(() => setToast(false), 2800)
   }
@@ -979,7 +979,7 @@ export default function Page() {
                         disabled={journey >= 4}
                         onChange={ev => {
                           const file = ev.target.files?.[0]
-                          if (file) { setProofName(file.name); setUserXp(20); if (journey < 4) dropped() }
+                          if (file) { setProofName(file.name); if (journey < 4) dropped() }
                         }}
                       />
                       <div className="flex items-center gap-4">
@@ -1444,11 +1444,8 @@ export default function Page() {
                       if (f) {
                         setDiyProofName(f.name);
                         setDiySkipped(false);
-                        setUserXp(prev => prev + 20);
-                        setToast(true);
                         setJourney(2);
                         setGuide(null);
-                        setTimeout(() => setToast(false), 2800);
                         setTimeout(() => {
                           document.getElementById('drop-off-hub')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }, 250);
@@ -1456,7 +1453,7 @@ export default function Page() {
                     }}
                   />
                   <CloudUpload className="h-5 w-5" />
-                  {diyProofName ? `Proof Attached (${diyProofName})` : 'Upload DIY Photo Proof (+20 GKP)'}
+                  {diyProofName ? `Photo Attached (${diyProofName})` : 'Attach DIY Preparation Photo'}
                 </label>
                 <button
                   onClick={() => {
